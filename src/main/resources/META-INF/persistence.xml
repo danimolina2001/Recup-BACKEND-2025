@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    
+    <persistence-unit name="recup-pu" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <!-- Entidades JPA del dominio -->
+        <class>com.recup.backend.domain.Artist</class>
+        <class>com.recup.backend.domain.Album</class>
+        <class>com.recup.backend.domain.Track</class>
+        <class>com.recup.backend.domain.Genre</class>
+        <class>com.recup.backend.domain.MediaType</class>
+        <class>com.recup.backend.domain.Playlist</class>
+        <class>com.recup.backend.domain.PlaylistTrack</class>
+        <class>com.recup.backend.domain.Employee</class>
+        <class>com.recup.backend.domain.Customer</class>
+        <class>com.recup.backend.domain.Invoice</class>
+        <class>com.recup.backend.domain.InvoiceItem</class>
+        
+        <properties>
+            <!-- H2 DataSource -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:database;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            
+            <!-- Hibernate: NO generar DDL, usar el provisto en database-ddl.sql -->
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <!-- Optimización batch inserts/updates -->
+            <property name="hibernate.jdbc.batch_size" value="50"/>
+            <property name="hibernate.order_inserts" value="true"/>
+            <property name="hibernate.order_updates" value="true"/>
+            <property name="hibernate.jdbc.batch_versioned_data" value="true"/>
+            <!-- Evitar generación de estadísticas costosas -->
+            <property name="hibernate.generate_statistics" value="false"/>
+        </properties>
+    </persistence-unit>
+</persistence>
